@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Certificate Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="logo.png" />
+
+  <!-- EmailJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- jsPDF for PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- JSZip for ZIP file creation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+  <!-- FileSaver.js for saving files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</head>
+<body>
+  <h2>E-Certificate Generator</h2>
+
+  <!-- ADD OWN CERT TEMPLATE -->
+  <!-- SEND EMAIL TO ALL -->
+  <!-- CSV Upload -->
+  <input type="file" id="csvFile" accept=".csv" />
+  <button id="generateAgain">Generate New</button>
+
+  <button id="downloadAllBtn">Download All as ZIP (PDF)</button>
+
+  <!-- Certificate Thumbnails -->
+  <div id="certificates"></div>
+
+  <!-- Modal Preview -->
+  <div id="modal">
+    <span class="closeModal">&times;</span>
+    <div id="modalContent">
+      <img id="fullImage" src="" alt="Full Certificate View" />
+    </div>
+  </div>
+
+  <!-- Name Positioning Canvas -->
+  <div id="positioning">
+    <h3>Position Name Placeholder</h3>
+    <canvas id="positionCanvas"></canvas>
+    <p>Drag the name to desired position. This will be used for all certificates.</p>
+  </div>
+
+  <!-- Main Script -->
+  <script src="script.js"></script>
+</body>
+</html>

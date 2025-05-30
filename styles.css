@@ -1,0 +1,67 @@
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+#positioning {
+    margin-top: 20px;
+}
+
+#positionCanvas {
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.certificate-wrapper {
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+}
+
+.thumb {
+    border: 1px solid #ccc;
+}
+
+button {
+    margin-top: 10px;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #ccc;
+}
+
+#modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#modalContent {
+    position: relative;
+    margin: 10% auto;
+    background: white;
+    padding: 20px;
+    max-width: 800px;
+    text-align: center;
+}
+
+#fullImage {
+    max-width: 100%;
+    height: auto;
+}
+
+.closeModal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+}
