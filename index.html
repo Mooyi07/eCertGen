@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>E-Certificate Generator</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="logo.png" />
+  <link rel="icon" href="logo.png" type="image/png" />
 
   <!-- EmailJS -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
   <!-- jsPDF for PDF generation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -16,36 +16,55 @@
   <!-- JSZip for ZIP file creation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
-  <!-- FileSaver.js for saving files -->
+  <!-- FileSaver.js for saving ZIP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 </head>
 <body>
-  <h2>E-Certificate Generator</h2>
+  <main>
+    <h2>E-Certificate Generator</h2>
 
-  <!-- ADD OWN CERT TEMPLATE -->
-  <!-- SEND EMAIL TO ALL -->
-  <!-- CSV Upload -->
-  <input type="file" id="csvFile" accept=".csv" />
-  <button id="generateAgain">Generate New</button>
+    <!-- Upload Template -->
+    <section>
+      <label for="templateUpload"><strong>Upload Certificate Template (PNG or JPG):</strong></label>
+      <input type="file" id="templateUpload" accept="image/png, image/jpeg" />
 
-  <button id="downloadAllBtn">Download All as ZIP (PDF)</button>
+      <!-- Template Preview -->
+      <div id="templatePreviewContainer" style="display:none; margin-top: 10px;">
+        <p><strong>Template Preview:</strong></p>
+        <img id="templatePreview" alt="Template Preview" style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
+      </div>
+    </section>
 
-  <!-- Certificate Thumbnails -->
-  <div id="certificates"></div>
+    <!-- Name Positioning Canvas -->
+    <section id="positioning">
+      <h3>Position Name Placeholder</h3>
+      <canvas id="positionCanvas" style="border: 1px solid #ccc;"></canvas>
+      <p>Drag the sample name to your desired position. This will be used on all certificates.</p>
+    </section>
 
-  <!-- Modal Preview -->
-  <div id="modal">
-    <span class="closeModal">&times;</span>
-    <div id="modalContent">
-      <img id="fullImage" src="" alt="Full Certificate View" />
-    </div>
-  </div>
+    <!-- CSV Upload -->
+    <section>
+      <h3>Upload CSV</h3>
+      <input type="file" id="csvFile" accept=".csv" />
+    </section>
 
-  <!-- Name Positioning Canvas -->
-  <div id="positioning">
-    <h3>Position Name Placeholder</h3>
-    <canvas id="positionCanvas"></canvas>
-    <p>Drag the name to desired position. This will be used for all certificates.</p>
+    <!-- Action Buttons -->
+    <section style="margin-top: 20px;">
+      <button id="generateAgain">Generate New</button>
+      <button id="downloadAllBtn">Download All as ZIP (PDF)</button>
+    </section>
+
+    <!-- Certificate Thumbnails -->
+    <section>
+      <h3>Generated Certificates</h3>
+      <div id="certificates" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+    </section>
+  </main>
+
+  <!-- Modal for Viewing Full Image -->
+  <div id="modal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background-color: rgba(0,0,0,0.8);">
+    <span class="closeModal" style="position:absolute; top:20px; right:30px; color:white; font-size:30px; cursor:pointer;">&times;</span>
+    <img id="fullImage" style="display:block; margin:auto; max-width:90%; max-height:90%;" />
   </div>
 
   <!-- Main Script -->
