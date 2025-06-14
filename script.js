@@ -31,11 +31,6 @@ document.getElementById('templateUpload').addEventListener('change', function (e
   }
 });
 
-// Init EmailJS
-(function () {
-  emailjs.init("oppLJXldS8e3obDT4");
-})();
-
 document.getElementById('generateAgain').addEventListener('click', async () => {
   location.reload();
 });
@@ -111,7 +106,6 @@ document.getElementById('csvFile').addEventListener('change', function (event) {
 
     for (let i = 1; i < data.length; i++) {
       const name = data[i][0];
-      const email = data[i][1];
 
       const canvas = document.createElement('canvas');
       canvas.width = certificateTemplate.width;
@@ -157,39 +151,9 @@ document.getElementById('csvFile').addEventListener('change', function (event) {
         modal.style.display = 'block';
       };
 
-      const sendBtn = document.createElement('button');
-      sendBtn.innerText = 'Send Email';
-      sendBtn.onclick = () => {
-        sendBtn.innerText = 'Sending...';
-        sendBtn.disabled = true;
-
-        const scaledCanvas = document.createElement('canvas');
-        const scaleFactor = 0.33;
-        scaledCanvas.width = canvas.width * scaleFactor;
-        scaledCanvas.height = canvas.height * scaleFactor;
-        const scaledCtx = scaledCanvas.getContext('2d');
-        scaledCtx.drawImage(canvas, 0, 0, scaledCanvas.width, scaledCanvas.height);
-
-        const certDataURL = scaledCanvas.toDataURL('image/jpeg', 0.7);
-
-        emailjs.send("service_7wqm21n", "template_n801tjn", {
-          to_email: email,
-          to_name: name,
-          time: new Date().toLocaleString(),
-          message: `Here is your certificate:<br><img src="${certDataURL}"/><br><a href="${certDataURL}" target="_blank">Download Certificate</a>`
-        }).then(() => {
-          sendBtn.innerText = 'Sent ✔️';
-        }).catch(error => {
-          console.error("Email failed:", error);
-          sendBtn.innerText = 'Error ❌';
-          sendBtn.disabled = false;
-        });
-      };
-
       wrapper.appendChild(thumb);
       wrapper.appendChild(downloadBtn);
       wrapper.appendChild(viewBtn);
-      wrapper.appendChild(sendBtn);
       container.appendChild(wrapper);
     }
   };
